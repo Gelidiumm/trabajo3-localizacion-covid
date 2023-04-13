@@ -4,6 +4,7 @@ package com.practica.genericas;
 import java.time.LocalDateTime;
 
 public class FechaHora implements Comparable<FechaHora>{
+
 	public static class Fecha {
 		private int dia, mes, anio;
 		 
@@ -25,6 +26,12 @@ public class FechaHora implements Comparable<FechaHora>{
 			this.dia = dia;
 			this.mes = mes;
 			this.anio = anio;
+		}
+
+		public Fecha(Fecha other) {
+			dia = other.dia;
+			mes = other.mes;
+			anio = other.anio;
 		}
 
 		public int getDia() {
@@ -82,6 +89,11 @@ public class FechaHora implements Comparable<FechaHora>{
 			this.minuto = minuto;
 		}
 
+		public Hora(Hora other) {
+			hora = other.hora;
+			minuto = other.minuto;
+		}
+
 		public int getHora() {
 			return hora;
 		}
@@ -121,6 +133,11 @@ public class FechaHora implements Comparable<FechaHora>{
 		return new FechaHora(date, time);
 	}	
 	
+	public FechaHora(FechaHora other) {
+		fecha = new Fecha(other.fecha);
+		hora = new Hora(other.hora);
+	}
+
 	public FechaHora(Fecha fecha, Hora hora) {
 		super();
 		this.fecha = fecha;
