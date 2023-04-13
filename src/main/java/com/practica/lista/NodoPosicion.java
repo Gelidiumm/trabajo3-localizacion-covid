@@ -11,11 +11,11 @@ import com.practica.genericas.PosicionPersona;
  */
 public class NodoPosicion {
 
-	private Coordenada coordenada;	
+	private Coordenada coordenada;
 	private int numPersonas;
 
-	public static NodoPosicion fromCoordenada(Coordenada coordenada) {
-		return new NodoPosicion(coordenada, 1);
+	public static NodoPosicion fromPosicionPersona(PosicionPersona pp) {
+		return new NodoPosicion(pp.getCoordenada(), 1);
 	}
 	
 	public NodoPosicion() {
@@ -28,8 +28,18 @@ public class NodoPosicion {
 		this.numPersonas = numPersonas;
 	}
 
+	public NodoPosicion(NodoPosicion np) {
+		this.coordenada = new Coordenada(np.coordenada);
+		this.numPersonas = np.numPersonas;
+	}
+
 	public void combine(NodoPosicion other) {
-		this.numPersonas += other.numPersonas;
+		if (this.coordenada.equals(other.coordenada))
+			this.numPersonas += other.numPersonas;
+	}
+
+	public int getNumPersonas() {
+		return numPersonas;
 	}
 
 	@Override
