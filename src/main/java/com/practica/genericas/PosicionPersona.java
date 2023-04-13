@@ -4,7 +4,7 @@ import com.practica.excecption.EmsInvalidNumberOfDataException;
 
 public class PosicionPersona {
 
-	private static int MAX_DATOS_LOCALIZACION = 5;
+	private static int MAX_DATOS_LOCALIZACION = 6;
 
 	private Coordenada coordenada;
 	private String documento;
@@ -12,7 +12,7 @@ public class PosicionPersona {
 
 	public static PosicionPersona parsePosicionPersona(String[] data) throws EmsInvalidNumberOfDataException {
 		
-		if (data.length < MAX_DATOS_LOCALIZACION) {
+		if (data.length != MAX_DATOS_LOCALIZACION) {
 			throw new EmsInvalidNumberOfDataException("La cantidad de campos de la localización es incorrecta");
 		}
 

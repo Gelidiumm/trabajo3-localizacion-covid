@@ -9,7 +9,7 @@ public class Persona {
 	FechaHora fechaNacimiento;
 
 	public static Persona parsePersona(String[] data) throws EmsInvalidNumberOfDataException{
-		if (data.length < MAX_DATOS_PERSONA) {
+		if (data.length != MAX_DATOS_PERSONA) {
 			throw new EmsInvalidNumberOfDataException("Invalid number of fields for PERSONA");
 		}
 		
