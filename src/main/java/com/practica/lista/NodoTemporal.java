@@ -1,5 +1,7 @@
 package com.practica.lista;
 
+import java.util.LinkedList;
+
 import com.practica.genericas.FechaHora;
 
 
@@ -8,33 +10,34 @@ import com.practica.genericas.FechaHora;
  * y las personas (solo número) que en ese instante están en una coordeanda en concreto  
  *
  */
-public class NodoTemporal {
-	private NodoPosicion listaCoordenadas;
-	private FechaHora fecha;
-	private NodoTemporal siguiente;
+public class NodoTemporal implements Comparable<NodoTemporal> {
 	
+	private LinkedList<NodoPosicion> listaCoordenadas;
+	private FechaHora fecha;
+
+	public static NodoTemporal fromFecha(FechaHora fecha) {
+		return new NodoTemporal(fecha);
+	}
 	
 	public NodoTemporal() {
 		super();
-		siguiente = null;
-		listaCoordenadas=null;	
+		listaCoordenadas = new LinkedList<NodoPosicion>();	
 	}
-	public NodoPosicion getListaCoordenadas() {
-		return listaCoordenadas;
+
+	public NodoTemporal(FechaHora fecha) {
+		super();
+		listaCoordenadas = new LinkedList<NodoPosicion>();
+		this.fecha = fecha;	
 	}
-	public void setListaCoordenadas(NodoPosicion listaCoordenadas) {
-		this.listaCoordenadas = listaCoordenadas;
+	
+	public void addCoordenada(Coordenada coordenada) {
+		NodePosicion np = NodePosicion.fromCoordenada(coordenada);
 	}
-	public FechaHora getFecha() {
-		return fecha;
+
+	@Override
+	public int compareTo(NodoTemporal arg0) {
+		return this.getFecha().compareTo(arg0.getFecha());
 	}
-	public void setFecha(FechaHora fecha) {
-		this.fecha = fecha;
-	}
-	public NodoTemporal getSiguiente() {
-		return siguiente;
-	}
-	public void setSiguiente(NodoTemporal siguiente) {
-		this.siguiente = siguiente;
-	}	
+	
+	
 }

@@ -1,11 +1,32 @@
 package com.practica.lista;
 
+import com.practica.genericas.Coordenada;
 import com.practica.genericas.FechaHora;
 import com.practica.genericas.PosicionPersona;
 
 public class ListaContactos {
+	
 	private NodoTemporal lista;
 	private int size;
+
+	private NodoTemporal findFecha(FechaHora fecha) {
+		NodoTemporal elem = lista;
+		NodoTemporal found = null;
+		
+		do {
+			int compare = elem.compareToFecha(fecha);
+			
+			if(compare==0) {
+				found = elem;
+			}
+
+			elem = elem.getSiguiente();
+		} while (elem!=null && found==null);
+
+		return found;
+	}
+
+	
 	
 	/**
 	 * Insertamos en la lista de nodos temporales, y a la vez inserto en la lista de nodos de coordenadas. 
