@@ -33,10 +33,7 @@ public class ListaContactos {
 	}
 
 	public String getPrimerNodo() {
-		NodoTemporal aux = lista.getFirst();
-		String cadena = aux.getFecha().getFecha().toString();
-		cadena+= ";" +  aux.getFecha().getHora().toString();
-		return cadena;
+		return lista.getFirst().toString();
 	}
 
 	public int numPersonasEntreDosInstantes(FechaHora inicio, FechaHora fin) {
@@ -50,8 +47,7 @@ public class ListaContactos {
 	public String toString() {
 		String cadena="";
 		for (NodoTemporal aux: lista) {
-			cadena += aux.getFecha().getFecha().toString();
-			cadena += ";" +  aux.getFecha().getHora().toString() + " ";
+			cadena += aux.toString() + " ";
 		}
 		return cadena.trim();
 	}
