@@ -60,12 +60,29 @@ public class FechaHora implements Comparable<FechaHora>{
 
 		@Override
 		public String toString() {
-			String cadena = String.format("%2d/%02d/%4d",dia,mes,anio);
-			return cadena;
+			return String.format("%2d/%02d/%4d",dia,mes,anio);
 		}
-		
-		
 
+		@Override
+		public boolean equals(Object obj) {
+			if (obj == null) {
+				return false;
+			}
+			if (getClass() != obj.getClass()) {
+				return false;
+			}
+			final Fecha other = (Fecha) obj;
+			return (this.dia == other.dia) && (this.mes == other.mes) && (this.anio == other.anio);
+		}
+
+		@Override
+		public int hashCode() {
+			int hash = 7;
+			hash = 97 * hash + this.dia;
+			hash = 97 * hash + this.mes;
+			hash = 97 * hash + this.anio;
+			return hash;
+		}
 	}
 
 	public static class Hora {
@@ -115,7 +132,25 @@ public class FechaHora implements Comparable<FechaHora>{
 			return String.format("%02d:%02d", hora,minuto);
 		}
 		
+		@Override
+		public boolean equals(Object obj) {
+			if (obj == null) {
+				return false;
+			}
+			if (getClass() != obj.getClass()) {
+				return false;
+			}
+			final Hora other = (Hora) obj;
+			return (this.hora == other.hora) && (this.minuto == other.minuto);
+		}
 
+		@Override
+		public int hashCode() {
+			int hash = 7;
+			hash = 97 * hash + this.hora;
+			hash = 97 * hash + this.minuto;
+			return hash;
+		}
 	}
 
 	Fecha fecha;
@@ -182,11 +217,8 @@ public class FechaHora implements Comparable<FechaHora>{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FechaHora fecha = (FechaHora) obj;
-		return getFecha().getDia() == fecha.getFecha().getDia() && getFecha().getMes() == fecha.getFecha().getMes()
-				&& getFecha().getAnio() == fecha.getFecha().getAnio()
-				&& getHora().getHora() == fecha.getHora().getHora()
-				&& getHora().getMinuto() == fecha.getHora().getMinuto();
+		FechaHora other = (FechaHora) obj;
+		return fecha.equals(other.fecha) &&  hora.equals(other.hora);
 	}
 
 	@Override
