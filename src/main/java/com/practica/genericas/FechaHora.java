@@ -1,11 +1,8 @@
 package com.practica.genericas;
 
-
-import java.time.LocalDateTime;
-
 public class FechaHora implements Comparable<FechaHora>{
 
-	public static class Fecha {
+	public static class Fecha implements Comparable<Fecha> {
 		private int dia, mes, anio;
 		 
 		public static  Fecha parseFecha(String data) throws IllegalArgumentException{
@@ -83,9 +80,20 @@ public class FechaHora implements Comparable<FechaHora>{
 			hash = 97 * hash + this.anio;
 			return hash;
 		}
+
+		@Override
+		public int compareTo(Fecha arg0) {
+			if (anio != arg0.anio) {
+				return anio - arg0.anio;
+			} else if (mes != arg0.mes) {
+				return mes - arg0.mes;
+			} else {
+				return dia - arg0.dia;
+			}
+		}
 	}
 
-	public static class Hora {
+	public static class Hora implements Comparable<Hora> {
 		private int hora, minuto;
 
 		public static Hora parseHora(String data) throws IllegalArgumentException {
@@ -151,6 +159,15 @@ public class FechaHora implements Comparable<FechaHora>{
 			hash = 97 * hash + this.minuto;
 			return hash;
 		}
+
+		@Override
+		public int compareTo(Hora arg0) {
+			if (hora != arg0.hora) {
+				return hora - arg0.hora;
+			} else {
+				return minuto - arg0.minuto;
+			}
+		}
 	}
 
 	Fecha fecha;
@@ -211,7 +228,7 @@ public class FechaHora implements Comparable<FechaHora>{
 
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) 
 			return true;
 		if (obj == null)
 			return false;
@@ -223,17 +240,15 @@ public class FechaHora implements Comparable<FechaHora>{
 
 	@Override
 	public int compareTo(FechaHora o) {
-		LocalDateTime dateTime1= LocalDateTime.of(this.getFecha().getAnio(), this.getFecha().getMes(), this.getFecha().getDia(), 
-				this.getHora().getHora(), this.getHora().getMinuto());
-		LocalDateTime dateTime2= LocalDateTime.of(o.getFecha().getAnio(), o.getFecha().getMes(), o.getFecha().getDia(), 
-				o.getHora().getHora(), o.getHora().getMinuto());
-		
-		return dateTime1.compareTo(dateTime2);
+		if (fecha.compareTo(o.fecha) != 0) {
+			return fecha.compareTo(o.fecha);
+		} else {
+			return hora.compareTo(o.hora);
+		}
 	}
 
 	@Override
 	public String toString() {
-
 		return String.format("%s;%s",
 				fecha.toString(),
 				hora.toString());
