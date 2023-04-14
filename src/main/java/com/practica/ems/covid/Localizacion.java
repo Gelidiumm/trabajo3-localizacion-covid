@@ -103,15 +103,13 @@ public class Localizacion {
 	@Override
 	public String toString() {
 		String cadena = "";
-		for(int i = 0; i < this.lista.size(); i++) {
-			PosicionPersona pp = lista.get(i);
-	        cadena += String.format("%s;", pp.getDocumento());
-			cadena += pp.getFechaPosicion().toString();
-	        cadena+=String.format("%.4f;%.4f\n", pp.getCoordenada().getLatitud(), 
-	        		pp.getCoordenada().getLongitud());
-	    }
-		
-		return cadena;		
+		for (PosicionPersona pp: lista) {
+			cadena += pp.toString();
+			cadena += "\n";
+		}
+		//remove last \n
+		cadena = cadena.substring(0, cadena.length()-1);
+		return cadena;
 	}
 	
 }
