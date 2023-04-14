@@ -85,19 +85,8 @@ public class Localizacion {
 	    
 	}
 	
-	void printLocalizacion() {    
-	    for(int i = 0; i < this.lista.size(); i++) {
-	        System.out.printf("%d;%s;", i, lista.get(i).getDocumento());
-	        FechaHora fecha = lista.get(i).getFechaPosicion();        
-	        System.out.printf("%02d/%02d/%04d;%02d:%02d;", 
-	        		fecha.getFecha().getDia(), 
-	        		fecha.getFecha().getMes(), 
-	        		fecha.getFecha().getAnio(),
-	        		fecha.getHora().getHora(),
-	        		fecha.getHora().getMinuto());
-	        System.out.printf("%.4f;%.4f\n", lista.get(i).getCoordenada().getLatitud(), 
-	        		lista.get(i).getCoordenada().getLongitud());
-	    }
+	void printLocalizacion() {  
+		System.out.printf(toString()); 
 	}
 
 	@Override
