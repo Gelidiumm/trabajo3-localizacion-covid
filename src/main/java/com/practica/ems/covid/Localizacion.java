@@ -1,8 +1,6 @@
 package com.practica.ems.covid;
 
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,19 +12,12 @@ import com.practica.genericas.FechaHora;
 import com.practica.genericas.PosicionPersona;
 
 public class Localizacion {
-	LinkedList<PosicionPersona> lista;
+
+	private List<PosicionPersona> lista;
 
 	public Localizacion() {
 		super();
 		this.lista = new LinkedList<PosicionPersona>();
-	};
-	
-	public LinkedList<PosicionPersona> getLista() {
-		return lista;
-	}
-
-	public void setLista(LinkedList<PosicionPersona> lista) {
-		this.lista = lista;
 	}
 
 	public void addLocalizacion (PosicionPersona p) throws EmsDuplicateLocationException {
@@ -55,16 +46,13 @@ public class Localizacion {
 		}
 
 		return result;
-		
 	}
 
 	public void delLocalizacion(String documento, FechaHora fh) throws EmsLocalizationNotFoundException {
 		PosicionPersona pp = new PosicionPersona(null, documento, fh);
-		
 		if (!lista.remove(pp)) {
 			throw new EmsLocalizationNotFoundException();
 		}
-	    
 	}
 	
 	void printLocalizacion() {  
