@@ -28,6 +28,11 @@ public class Persona {
 
 	}
 
+	public Persona(String documento) {
+		super();
+		this.documento = documento;
+	}
+	
 	public Persona(String nombre, String apellidos, String documento, String email, String direccion, String cp,
 			FechaHora fechaNacimiento) {
 		super();
@@ -112,5 +117,22 @@ public class Persona {
 		cadena+=fecha.toString();
 
 		return cadena;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (this.getClass() != obj.getClass()) {
+			return false;
+		}
+		Persona other = (Persona) obj;
+		return documento.equals(other.documento);
+	}
+
+	@Override
+	public int hashCode() {
+		return documento.hashCode();
 	}
 }
