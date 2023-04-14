@@ -201,12 +201,10 @@ public class FechaHora implements Comparable<FechaHora>{
 
 	@Override
 	public String toString() {
-		return String.format("%02d/%02d/%04d;%02d:%02d;",
-				fecha.getDia(),
-				fecha.getMes(),
-				fecha.getAnio(),
-				hora.getHora(),
-				hora.getMinuto());
+
+		return String.format("%s;%s",
+				fecha.toString(),
+				hora.toString());
 	}
 	
 }
