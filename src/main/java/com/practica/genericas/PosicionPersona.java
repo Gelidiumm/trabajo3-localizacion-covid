@@ -55,10 +55,40 @@ public class PosicionPersona {
 	public void setFechaPosicion(FechaHora fechaPosicion) {
 		this.fechaPosicion = fechaPosicion;
 	}
+
+	public boolean isThisPerson(String documento) {
+		return this.documento.equals(documento);
+	}
 	
 	@Override
 	public String toString() {
 		return String.format("%s;%s;%s", documento, fechaPosicion.toString(), coordenada.toString());
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (obj == this) {
+			return true;
+		}
+		if (!(obj instanceof PosicionPersona)) {
+			return false;
+		}
+		
+		PosicionPersona posicionPersona = (PosicionPersona) obj;
+		return posicionPersona.documento.equals(this.getDocumento()) && 
+			posicionPersona.fechaPosicion.equals(this.getFechaPosicion());
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 23;
+		int result = 1;
+		result = prime * result + ((documento == null) ? 0 : documento.hashCode());
+		result = prime * result + ((fechaPosicion == null) ? 0 : fechaPosicion.hashCode());
+		return result;
 	}
 		
 }

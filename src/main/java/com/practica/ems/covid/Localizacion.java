@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.practica.excecption.EmsDuplicateLocationException;
 import com.practica.excecption.EmsLocalizationNotFoundException;
@@ -29,59 +30,40 @@ public class Localizacion {
 	}
 
 	public void addLocalizacion (PosicionPersona p) throws EmsDuplicateLocationException {
-		try {
-			findLocalizacion(p.getDocumento(), p.getFechaPosicion().getFecha().toString(),p.getFechaPosicion().getHora().toString() );
+		if (lista.contains(p)) {
 			throw new EmsDuplicateLocationException();
-		}catch(EmsLocalizationNotFoundException e) {
-			lista.add(p);
 		}
+		lista.add(p);
 	}
 	
-	public int findLocalizacion (String documento, String fecha, String hora) throws EmsLocalizationNotFoundException {
-	    int cont = 0;
-	    Iterator<PosicionPersona> it = lista.iterator();
-	    while(it.hasNext()) {
-	    	cont++;
-	    	PosicionPersona pp = it.next();
-	    	FechaHora fechaHora = FechaHora.parseFecha(fecha, hora);
-	    	if(pp.getDocumento().equals(documento) && 
-	    	   pp.getFechaPosicion().equals(fechaHora)) {
-	    		return cont;
-	    	}
-	    } 
-	    throw new EmsLocalizationNotFoundException();
+	public int findLocalizacion (String documento, FechaHora fh) throws EmsLocalizationNotFoundException {
+	    PosicionPersona pp = new PosicionPersona(null, documento, fh);
+		int pos = lista.indexOf(pp);
+		
+		if (pos == -1) {
+			throw new EmsLocalizationNotFoundException();
+		}
+
+		return pos + 1;
 	}
 
 	public List<PosicionPersona> localizacionPersona(String documento) throws EmsPersonNotFoundException {
-		int cont = 0;
-		List<PosicionPersona> lista = new ArrayList<PosicionPersona>();
-		Iterator<PosicionPersona> it = lista.iterator();
-		while (it.hasNext()) {
-			PosicionPersona pp = it.next();
-			if (pp.getDocumento().equals(documento)) {
-				cont++;
-				lista.add(pp);
-			}
-		}
-		
-		if (cont == 0) {
+		List<PosicionPersona> result = lista.stream().filter(pp -> pp.isThisPerson(documento)).collect(Collectors.toList());
+
+		if (result.isEmpty()) {
 			throw new EmsPersonNotFoundException();
 		}
+
+		return result;
 		
-		return lista;
 	}
 
-	public void delLocalizacion(String documento, String fecha, String hora) throws EmsLocalizationNotFoundException {
-	    int pos=-1;
-	    /**
-	     *  Busca la localización, sino existe lanza una excepción
-	     */
-	    try {
-			pos = findLocalizacion(documento, fecha, hora);
-		} catch (EmsLocalizationNotFoundException e) {
+	public void delLocalizacion(String documento, FechaHora fh) throws EmsLocalizationNotFoundException {
+		PosicionPersona pp = new PosicionPersona(null, documento, fh);
+		
+		if (!lista.remove(pp)) {
 			throw new EmsLocalizationNotFoundException();
 		}
-	    this.lista.remove(pos);
 	    
 	}
 	
