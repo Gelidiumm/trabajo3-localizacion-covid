@@ -119,22 +119,6 @@ public class FechaHora implements Comparable<FechaHora>{
 			minuto = other.minuto;
 		}
 
-		public int getHora() {
-			return hora;
-		}
-
-		public void setHora(int hora) {
-			this.hora = hora;
-		}
-
-		public int getMinuto() {
-			return minuto;
-		}
-
-		public void setMinuto(int minuto) {
-			this.minuto = minuto;
-		}
-
 		@Override
 		public String toString() {
 			return String.format("%02d:%02d", hora,minuto);
@@ -199,22 +183,6 @@ public class FechaHora implements Comparable<FechaHora>{
 	public FechaHora(int dia, int mes, int anio, int hora, int minuto) {
 		this.fecha = new Fecha(dia, mes, anio);
 		this.hora = new Hora(hora, minuto);
-	}
-
-	public Fecha getFecha() {
-		return fecha;
-	}
-
-	public void setFecha(Fecha fecha) {
-		this.fecha = fecha;
-	}
-
-	public Hora getHora() {
-		return hora;
-	}
-
-	public void setHora(Hora hora) {
-		this.hora = hora;
 	}
 
 	@Override
