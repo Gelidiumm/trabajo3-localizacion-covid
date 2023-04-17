@@ -12,6 +12,7 @@ import com.practica.excecption.EmsInvalidNumberOfDataException;
 import com.practica.excecption.EmsInvalidTypeException;
 import com.practica.excecption.EmsLocalizationNotFoundException;
 import com.practica.excecption.EmsPersonNotFoundException;
+import com.practica.genericas.FechaHora;
 import com.practica.genericas.Persona;
 import com.practica.genericas.PosicionPersona;
 import com.practica.lista.ListaContactos;
@@ -79,7 +80,8 @@ public class ContactosCovid {
 	}
 
 	public int findLocalizacion(String documento, String fecha, String hora) throws EmsLocalizationNotFoundException {
-		return localizacion.findLocalizacion(documento, fecha, hora);
+		FechaHora fh = FechaHora.parseFecha(fecha, hora);
+		return localizacion.findLocalizacion(documento, fh);
 	}
 
 	public List<PosicionPersona> localizacionPersona(String documento) throws EmsPersonNotFoundException {

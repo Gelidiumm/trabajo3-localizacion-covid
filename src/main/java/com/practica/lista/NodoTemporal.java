@@ -86,4 +86,9 @@ public class NodoTemporal implements Comparable<NodoTemporal> {
 		NodoTemporal other = (NodoTemporal) obj;
 		return this.fecha.equals(other.fecha);
 	}
+
+	@Override
+	public String toString() {
+		return fecha.toString();
+	}
 }

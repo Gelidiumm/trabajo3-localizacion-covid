@@ -31,46 +31,48 @@ public class PosicionPersona {
 		this.documento = documento;
 		this.fechaPosicion = fechaPosicion;
 	}
-	
+
 	public Coordenada getCoordenada() {
-		return coordenada;
+		return new Coordenada(coordenada);
 	}
-	
-	public void setCoordenada(Coordenada coordenada) {
-		this.coordenada = coordenada;
-	}
-	
-	public String getDocumento() {
-		return documento;
-	}
-	
-	public void setDocumento(String documento) {
-		this.documento = documento;
-	}
-	
+
 	public FechaHora getFechaPosicion() {
-		return fechaPosicion;
+		return new FechaHora(fechaPosicion);
 	}
-	
-	public void setFechaPosicion(FechaHora fechaPosicion) {
-		this.fechaPosicion = fechaPosicion;
+
+	public boolean isThisPerson(String documento) {
+		return this.documento.equals(documento);
 	}
 	
 	@Override
 	public String toString() {
-		String cadena = "";
-        cadena += String.format("%s;", getDocumento());
-        FechaHora fecha = getFechaPosicion();        
-        cadena+=String.format("%02d/%02d/%04d;%02d:%02d;", 
-	        		fecha.getFecha().getDia(), 
-	        		fecha.getFecha().getMes(), 
-	        		fecha.getFecha().getAnio(),
-	        		fecha.getHora().getHora(),
-	        		fecha.getHora().getMinuto());
-        cadena+=String.format("%.4f;%.4f\n", getCoordenada().getLatitud(), 
-	        		getCoordenada().getLongitud());
-	
-		return cadena;
+		return String.format("%s;%s;%s", documento, fechaPosicion.toString(), coordenada.toString());
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+		if (obj == this) {
+			return true;
+		}
+		if (!(obj instanceof PosicionPersona)) {
+			return false;
+		}
+		
+		PosicionPersona posicionPersona = (PosicionPersona) obj;
+		return posicionPersona.documento.equals(this.documento) && 
+			posicionPersona.fechaPosicion.equals(this.fechaPosicion);
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 23;
+		int result = 1;
+		result = prime * result + ((documento == null) ? 0 : documento.hashCode());
+		result = prime * result + ((fechaPosicion == null) ? 0 : fechaPosicion.hashCode());
+		return result;
 	}
 		
 }
