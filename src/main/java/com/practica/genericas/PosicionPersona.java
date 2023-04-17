@@ -31,29 +31,13 @@ public class PosicionPersona {
 		this.documento = documento;
 		this.fechaPosicion = fechaPosicion;
 	}
-	
+
 	public Coordenada getCoordenada() {
-		return coordenada;
+		return new Coordenada(coordenada);
 	}
-	
-	public void setCoordenada(Coordenada coordenada) {
-		this.coordenada = coordenada;
-	}
-	
-	public String getDocumento() {
-		return documento;
-	}
-	
-	public void setDocumento(String documento) {
-		this.documento = documento;
-	}
-	
+
 	public FechaHora getFechaPosicion() {
-		return fechaPosicion;
-	}
-	
-	public void setFechaPosicion(FechaHora fechaPosicion) {
-		this.fechaPosicion = fechaPosicion;
+		return new FechaHora(fechaPosicion);
 	}
 
 	public boolean isThisPerson(String documento) {
@@ -78,8 +62,8 @@ public class PosicionPersona {
 		}
 		
 		PosicionPersona posicionPersona = (PosicionPersona) obj;
-		return posicionPersona.documento.equals(this.getDocumento()) && 
-			posicionPersona.fechaPosicion.equals(this.getFechaPosicion());
+		return posicionPersona.documento.equals(this.documento) && 
+			posicionPersona.fechaPosicion.equals(this.fechaPosicion);
 	}
 
 	@Override
