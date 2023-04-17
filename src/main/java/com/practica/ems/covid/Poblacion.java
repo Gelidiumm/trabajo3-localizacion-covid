@@ -1,28 +1,27 @@
 package com.practica.ems.covid;
 
-
-import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 import com.practica.excecption.EmsDuplicatePersonException;
 import com.practica.excecption.EmsPersonNotFoundException;
-import com.practica.genericas.FechaHora;
 import com.practica.genericas.Persona;
 
 public class Poblacion {
-	LinkedList<Persona> lista ;
+	
+	private List<Persona> lista;
 
 	public Poblacion() {
 		super();
 		this.lista = new LinkedList<Persona>();
 	}
-	
-	public LinkedList<Persona> getLista() {
-		return lista;
-	}
 
-	public void setLista(LinkedList<Persona> lista) {
-		this.lista = lista;
+	public List<Persona> getLista() {		
+		List<Persona> lista = new LinkedList<Persona>();
+		for(Persona p: this.lista) {
+			lista.add(new Persona(p));
+		}
+		return lista;
 	}
 
 	public void addPersona (Persona persona) throws EmsDuplicatePersonException {
