@@ -1,4 +1,4 @@
-[![SonarCloud](https://github.com/alumnoficticio3/trabajo3-localizacion-covid/actions/workflows/main.yml/badge.svg)](https://github.com/alumnoficticio3/trabajo3-localizacion-covid/actions/workflows/main.yml)
+[![SonarCloud](https://github.com/Gelidiumm/trabajo3-localizacion-covid/actions/workflows/main.yml/badge.svg)](https://github.com/Gelidiumm/trabajo3-localizacion-covid/actions/workflows/main.yml)
 
 # EMS-lab3 Maintainability
 
